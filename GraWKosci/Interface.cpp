@@ -8,6 +8,14 @@ int maxNumOfParticipants = 4;
 //int minNumOfRounds = 1;
 //int maxNumOfRounds = 9;
 
+bool areOnlySpaces(string& word) {
+    for (auto& letter : word) {
+        if (letter != ' ')
+            return false;
+    }
+    return true;
+}
+
 void mainTitle() {
     color(PRIMARY_COLOR);
     cout << "\n\t G R A   W   K O Œ C I\n";
@@ -81,7 +89,7 @@ void newGame(int numOfParticipants) {
         color(PRIMARY_COLOR);
         getline(cin, nickname);
         color(TEXT_COLOR);
-        if (nickname.length() < minNicknameCharLong || nickname.length() > maxNicknameCharLong) {
+        if (nickname.length() < minNicknameCharLong || nickname.length() > maxNicknameCharLong || areOnlySpaces(nickname)) {
             cout << "\n Wprowadzono nieprawid³ow¹ nazwê!\n\n";
             i--;
         }

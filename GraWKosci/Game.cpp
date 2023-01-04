@@ -396,7 +396,7 @@ void Game::roundHandler(Participant& player) { // one full round
 		while (true) {
 			if (_getch() == KEY_ENTER) {
 				for (int i = selectedDices.size(); i < numOfDices; i++) { // all dices left (gives 0 if has been already selected)
-					resultsSet.insert(std::pair<int, int>(i, randomNum(1, 1)));
+					resultsSet.insert(std::pair<int, int>(i, randomNum(1, 6)));
 				}
 				break;
 			}
