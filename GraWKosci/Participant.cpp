@@ -50,6 +50,24 @@ bool areXUniqueValues2(vector<int> vec, int x) {
 	return false;
 }
 
+bool isFull2(vector<int>vec, int x) {
+	if (!areXUniqueValues2(vec, x))
+		return false;
+	// two variables with 2 unique numbers from vec
+	int firstNum = vec[0];
+	int secondNum = 0;
+	for (auto& el : vec) {
+		if (el != firstNum)
+			secondNum = el;
+	}
+	int numOfFirstNums = std::count(vec.begin(), vec.end(), firstNum);
+	int numOfSecondNums = std::count(vec.begin(), vec.end(), secondNum);
+
+	if ((numOfFirstNums == 2 && numOfSecondNums == 3) || (numOfFirstNums == 3 && numOfSecondNums == 2))
+		return true;
+	return false;
+}
+
 int sumAllValues2(vector<int> vec) {
 	int sum = 0;
 	for (auto& el : vec) {
@@ -99,7 +117,7 @@ void Participant::setQuadruple(vector<int> dices) {
 }
 
 void Participant::setFull(vector<int> dices) {
-	if (areXUniqueValues2(dices, 2))
+	if (isFull2(dices, 2))
 		full = 25;
 	else 
 		full = 0;
@@ -125,7 +143,7 @@ void Participant::setBigStrit(vector<int> dices) {
 
 void Participant::setGeneral(vector<int> dices) {
 	if (areXUniqueValues2(dices, 1))
-		general = 40;
+		general = 50;
 	else general = 0;
 
 	allPoints += general;

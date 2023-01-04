@@ -96,12 +96,19 @@ int sumXSameValues(vector<int> vec, int x) {
 
 bool areXInOrder(vector<int> vec, int x) {
 	int sum = 1;
+	int numOfCopies = 1;
 	std::sort(vec.begin(), vec.end());
 	for (int i = 0; i < vec.size() - 1; i++) {
 		if (vec[i + 1] == vec[i] + 1) {
 			sum++;
 			if (sum == x) {
 				return true;
+			}
+		}
+		else if (vec[i + 1] == vec[i]) {
+			numOfCopies--;
+			if (numOfCopies < 0) {
+				return false;
 			}
 		}
 		else {
@@ -119,6 +126,24 @@ bool areXUniqueValues(vector<int> vec, int x) {
 	if (unique.size() == x) {
 		return true;
 	}
+	return false;
+}
+
+bool isFull(vector<int>vec, int x) {
+	if (!areXUniqueValues(vec, x))
+		return false;
+	// two variables with 2 unique numbers from vec
+	int firstNum = vec[0];
+	int secondNum = 0;
+	for (auto& el : vec) {
+		if (el != firstNum)
+			secondNum = el;
+	}
+	int numOfFirstNums = std::count(vec.begin(), vec.end(), firstNum);
+	int numOfSecondNums = std::count(vec.begin(), vec.end(), secondNum);
+	
+	if ((numOfFirstNums == 2 && numOfSecondNums == 3) || (numOfFirstNums == 3 && numOfSecondNums == 2))
+		return true;
 	return false;
 }
 
@@ -184,7 +209,7 @@ void pointsTable(vector<int> finalDices, Participant& player, int round) {
 	pointsALLTableVec.insert({ 5, " Szóstki:\t\t " + to_string(sumValuesWithKey(6, finalDices)) + "\n" });
 	pointsALLTableVec.insert({ 6, " 3 jednakowe:\t\t " + to_string(sumXSameValues(finalDices, 3)) + "\n" });
 	pointsALLTableVec.insert({ 7, " 4 jednakowe:\t\t " + to_string(sumXSameValues(finalDices, 4)) + "\n" });
-		areXUniqueValues(finalDices, 2) ? pointsALLTableVec.insert({ 8, " Full:\t\t\t 25\n" }) : pointsALLTableVec.insert({ 8, " Full:\t\t\t 0\n" });
+		isFull(finalDices, 2) ? pointsALLTableVec.insert({ 8, " Full:\t\t\t 25\n" }) : pointsALLTableVec.insert({ 8, " Full:\t\t\t 0\n" });
 		areXInOrder(finalDices, 4) ? pointsALLTableVec.insert({ 9, " Ma³y strit:\t\t 30\n" }) : pointsALLTableVec.insert({ 9, " Ma³y strit:\t\t 0\n" });
 		areXInOrder(finalDices, 5) ? pointsALLTableVec.insert({ 10, " Du¿y strit:\t\t 40\n" }) : pointsALLTableVec.insert({ 10, " Du¿y strit:\t\t 0\n" });
 		areXUniqueValues(finalDices, 1) ? pointsALLTableVec.insert({ 11, " Genera³:\t\t 50\n" }) : pointsALLTableVec.insert({ 11, " Genera³:\t\t 0\n" });
@@ -371,7 +396,7 @@ void Game::roundHandler(Participant& player) { // one full round
 		while (true) {
 			if (_getch() == KEY_ENTER) {
 				for (int i = selectedDices.size(); i < numOfDices; i++) { // all dices left (gives 0 if has been already selected)
-					resultsSet.insert(std::pair<int, int>(i, randomNum(1, 6)));
+					resultsSet.insert(std::pair<int, int>(i, randomNum(1, 1)));
 				}
 				break;
 			}
