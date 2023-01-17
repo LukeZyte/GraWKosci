@@ -7,7 +7,7 @@ int randomNum(int min, int max) {
 	return distr(gen);
 }
 
-void playerCall(int round, Participant player) {
+void playerCall(int round, Participant& player) {
 	color(TEXT_COLOR);
 	cout << "\n\t Tura gracza: "; color(PRIMARY_COLOR); cout << player.getNickname(); color(TEXT_COLOR); cout << " : : Runda " << round << "\n\n";
 	cout << " Zdobyte punkty: ";
@@ -22,25 +22,25 @@ void controlsHelper() {
 	color(TEXT_COLOR);
 }
 
-void cheatSheet() {
+void cheatSheet(Participant& player) {
 	cout << "Tabela uk³adów oczek\n\n";
 	cout <<
-		"    Nazwa    |   Warunek do zdobycia  |  Przyk³ad  |       Wynik\n" <<
-		"-------------|------------------------|------------|---------------------\n" <<
-		"   Jedynki   |          brak          | "; color(PRIMARY_COLOR); cout << "1 1 1 "; color(TEXT_COLOR); cout << "3 4  | suma jedynek (3 pkt)\n" <<
-		"   Dwójki    |          brak          | "; color(PRIMARY_COLOR); cout << "2 2 2 "; color(TEXT_COLOR); cout << "5 6  | suma dwójek (6 pkt)\n" <<
-		"   Trójki    |          brak          | "; color(PRIMARY_COLOR); cout << "3 3 3 3 "; color(TEXT_COLOR); cout << "4  | suma trójek (12 pkt)\n" <<
-		"   Czwórki   |          brak          | "; color(PRIMARY_COLOR); cout << "4 4 "; color(TEXT_COLOR); cout << "5 5 5  | suma czwórek (8 pkt)\n" <<
-		"   Pi¹tki    |          brak          | 1 1 2 2 "; color(PRIMARY_COLOR); cout << "5 "; color(TEXT_COLOR); cout << " | suma pi¹tek (5 pkt)\n" <<
-		"   Szóstki   |          brak          | 2 3 "; color(PRIMARY_COLOR); cout << "6 6 6 "; color(TEXT_COLOR); cout << " | suma szóstek (18 pkt)\n" <<
-		"-------------|------------------------|------------|---------------------\n" <<
-		" 3 jednakowe | trzy jednakowe koœci   | "; color(PRIMARY_COLOR); cout << "4 4 "; color(TEXT_COLOR); cout << "3 "; color(PRIMARY_COLOR); cout << "4 "; color(TEXT_COLOR); cout << "6  | suma oczek (17 pkt)\n" <<
-		" 4 jednakowe | cztery jednakowe koœci | "; color(PRIMARY_COLOR); cout << "2 2 "; color(TEXT_COLOR); cout << "6 "; color(PRIMARY_COLOR); cout << "2 2 "; color(TEXT_COLOR); cout << " | suma oczek (15 pkt)\n"; color(TEXT_COLOR); cout <<
-		"     Full    |     trójka i para      | "; color(PRIMARY_COLOR); cout << "6 6 4 4 4 "; color(TEXT_COLOR); cout << " | zawsze 25 pkt\n"; color(TEXT_COLOR); cout <<
-		"  Ma³y strit |    4 w kolejnoœci      | 5 "; color(PRIMARY_COLOR); cout << "2 3 4 5 "; color(TEXT_COLOR); cout << " | zawsze 30 pkt\n"; cout <<
-		"  Du¿y strit |    5 w kolejnoœci      | "; color(PRIMARY_COLOR); cout << "1 2 3 4 5 "; color(TEXT_COLOR); cout << " | zawsze 40 pkt\n"; cout <<
-		"   Genera³   | 5 takich samych oczek  | "; color(PRIMARY_COLOR); cout << "2 2 2 2 2 "; color(TEXT_COLOR); cout << " | zawsze 50 pkt\n"; cout <<
-		"    Szansa   |          brak          | 1 1 3 3 5 "; color(TEXT_COLOR); cout << " | suma oczek (13 pkt)\n";
+		" U¿yte |    Nazwa    |   Warunek do zdobycia  |  Przyk³ad  | Wynik dla przyk³adu\n" <<
+		"-------|-------------|------------------------|------------|---------------------\n"; color(PRIMARY_COLOR); player.isOnesEmpty() ? cout << "       " : cout << "  Tak  "; color(TEXT_COLOR); cout <<
+		"|   Jedynki   |          brak          | "; color(PRIMARY_COLOR); cout << "1 1 1 "; color(TEXT_COLOR); cout << "3 4  | suma jedynek (3 pkt)\n"; color(PRIMARY_COLOR); player.isTwosEmpty() ? cout << "       " : cout << "  Tak  "; color(TEXT_COLOR); cout <<
+		"|   Dwójki    |          brak          | "; color(PRIMARY_COLOR); cout << "2 2 2 "; color(TEXT_COLOR); cout << "5 6  | suma dwójek (6 pkt)\n"; color(PRIMARY_COLOR); player.isThreesEmpty() ? cout << "       " : cout << "  Tak  "; color(TEXT_COLOR); cout <<
+		"|   Trójki    |          brak          | "; color(PRIMARY_COLOR); cout << "3 3 3 3 "; color(TEXT_COLOR); cout << "4  | suma trójek (12 pkt)\n"; color(PRIMARY_COLOR); player.isFoursEmpty() ? cout << "       " : cout << "  Tak  "; color(TEXT_COLOR); cout <<
+		"|   Czwórki   |          brak          | "; color(PRIMARY_COLOR); cout << "4 4 "; color(TEXT_COLOR); cout << "5 5 5  | suma czwórek (8 pkt)\n"; color(PRIMARY_COLOR); player.isFivesEmpty() ? cout << "       " : cout << "  Tak  "; color(TEXT_COLOR); cout <<
+		"|   Pi¹tki    |          brak          | 1 1 2 2 "; color(PRIMARY_COLOR); cout << "5 "; color(TEXT_COLOR); cout << " | suma pi¹tek (5 pkt)\n"; color(PRIMARY_COLOR); player.isSixesEmpty() ? cout << "       " : cout << "  Tak  "; color(TEXT_COLOR); cout <<
+		"|   Szóstki   |          brak          | 2 3 "; color(PRIMARY_COLOR); cout << "6 6 6 "; color(TEXT_COLOR); cout << " | suma szóstek (18 pkt)\n"
+		"-------|-------------|------------------------|------------|---------------------\n"; color(PRIMARY_COLOR); player.isTripleEmpty() ? cout << "       " : cout << "  Tak  "; color(TEXT_COLOR); cout <<
+		"| 3 jednakowe | trzy jednakowe koœci   | "; color(PRIMARY_COLOR); cout << "4 4 "; color(TEXT_COLOR); cout << "3 "; color(PRIMARY_COLOR); cout << "4 "; color(TEXT_COLOR); cout << "6  | suma oczek (17 pkt)\n"; color(PRIMARY_COLOR); player.isQuadrupleEmpty() ? cout << "       " : cout << "  Tak  "; color(TEXT_COLOR); cout <<
+		"| 4 jednakowe | cztery jednakowe koœci | "; color(PRIMARY_COLOR); cout << "2 2 "; color(TEXT_COLOR); cout << "6 "; color(PRIMARY_COLOR); cout << "2 2 "; color(TEXT_COLOR); cout << " | suma oczek (15 pkt)\n"; color(TEXT_COLOR); color(PRIMARY_COLOR); player.isFullEmpty() ? cout << "       " : cout << "  Tak  "; color(TEXT_COLOR); cout <<
+		"|     Full    |     trójka i para      | "; color(PRIMARY_COLOR); cout << "6 6 4 4 4 "; color(TEXT_COLOR); cout << " | zawsze 25 pkt\n"; color(TEXT_COLOR); color(PRIMARY_COLOR); player.isSmallStritEmpty() ? cout << "       " : cout << "  Tak  "; color(TEXT_COLOR); cout <<
+		"|  Ma³y strit |    4 w kolejnoœci      | 5 "; color(PRIMARY_COLOR); cout << "2 3 4 5 "; color(TEXT_COLOR); cout << " | zawsze 30 pkt\n"; color(PRIMARY_COLOR); player.isBigStritEmpty() ? cout << "       " : cout << "  Tak  "; color(TEXT_COLOR); cout <<
+		"|  Du¿y strit |    5 w kolejnoœci      | "; color(PRIMARY_COLOR); cout << "1 2 3 4 5 "; color(TEXT_COLOR); cout << " | zawsze 40 pkt\n"; color(PRIMARY_COLOR); player.isGeneralEmpty() ? cout << "       " : cout << "  Tak  "; color(TEXT_COLOR); cout <<
+		"|   Genera³   | 5 takich samych oczek  | "; color(PRIMARY_COLOR); cout << "2 2 2 2 2 "; color(TEXT_COLOR); cout << " | zawsze 50 pkt\n"; color(PRIMARY_COLOR); player.isChanceEmpty() ? cout << "       " : cout << "  Tak  "; color(TEXT_COLOR); cout <<
+		"|    Szansa   |          brak          | 1 1 3 3 5 "; color(TEXT_COLOR); cout << " | suma oczek (13 pkt)\n";
 }
 
 void Game::initGame() {
@@ -84,14 +84,27 @@ int sumValuesWithKey(int key, vector<int> vec) {
 	return sum;
 }
 
+//int sumXSameValues(vector<int> vec, int x) {
+//	for (auto& el : vec) {
+//		int number = std::count(vec.begin(), vec.end(), el);
+//		if (number == x) {
+//			return el * x;
+//		}
+//	}
+//	return 0;
+//}
 int sumXSameValues(vector<int> vec, int x) {
+	int sum = 0;
 	for (auto& el : vec) {
 		int number = std::count(vec.begin(), vec.end(), el);
-		if (number == x) {
-			return el * x;
+		if (number >= x) {
+			for (auto& value : vec) {
+				sum += value;
+			}
+			return sum;
 		}
 	}
-	return 0;
+	return sum;
 }
 
 bool areXInOrder(vector<int> vec, int x) {
@@ -165,41 +178,6 @@ void pointsTable(vector<int> finalDices, Participant& player, int round) {
 	cout << "\n\n Wybierz uk³ad:\n\n";
 	cout << " Nazwa\t    Punkty do zdobycia\n-------------------------------\n";
 
-	/*
-	vector<string> pointsTableVec;
-	if (player.isOnesEmpty()) { pointsTableVec.push_back(" Jedynki:\t\t " + to_string(sumValuesWithKey(1, finalDices)) + "\n"); }
-	if (player.isTwosEmpty()) { pointsTableVec.push_back(" Dwójki:\t\t " + to_string(sumValuesWithKey(2, finalDices)) + "\n"); }
-	if (player.isThreesEmpty()) { pointsTableVec.push_back(" Trójki:\t\t " + to_string(sumValuesWithKey(3, finalDices)) + "\n"); }
-	if (player.isFoursEmpty()) { pointsTableVec.push_back(" Czwórki:\t\t " + to_string(sumValuesWithKey(4, finalDices)) + "\n"); }
-	if (player.isFivesEmpty()) { pointsTableVec.push_back(" Pi¹tki:\t\t " + to_string(sumValuesWithKey(5, finalDices)) + "\n"); }
-	if (player.isSixesEmpty()) { pointsTableVec.push_back(" Szóstki:\t\t " + to_string(sumValuesWithKey(6, finalDices)) + "\n"); }
-	if (player.isTripleEmpty()) { pointsTableVec.push_back(" 3 jednakowe:\t\t " + to_string(sumXSameValues(finalDices, 3)) + "\n"); }
-	if (player.isQuadrupleEmpty()) { pointsTableVec.push_back(" 4 jednakowe:\t\t " + to_string(sumXSameValues(finalDices, 4)) + "\n"); }
-	if (player.isFullEmpty()) { pointsTableVec.push_back(areXUniqueValues(finalDices, 2) ? " Full:\t\t\t 25\n" : " Full:\t\t\t 0\n"); }
-	if (player.isSmallStritEmpty()) { pointsTableVec.push_back(areXInOrder(finalDices, 4) ? " Ma³y strit:\t\t 30\n" : " Ma³y strit:\t\t 0\n"); }
-	if (player.isBigStritEmpty()) { pointsTableVec.push_back(areXInOrder(finalDices, 5) ? " Du¿y strit:\t\t 40\n" : " Du¿y strit:\t\t 0\n"); }
-	if (player.isGeneralEmpty()) { pointsTableVec.push_back(areXUniqueValues(finalDices, 1) ? " Genera³:\t\t 50\n" : " Genera³:\t\t 0\n"); }
-	if (player.isChanceEmpty()) { pointsTableVec.push_back(" Szansa:\t\t " + to_string(sumAllValues(finalDices)) + "\n"); }
-	*/
-	//vector<int> pointsTableSelectedIds;
-	//if (player.isOnesEmpty()) { pointsTableVec.insert({ 0, " Jedynki:\t\t " + to_string(sumValuesWithKey(1, finalDices)) + "\n" }); }
-	//if (player.isTwosEmpty()) { pointsTableVec.insert({ 1, " Dwójki:\t\t " + to_string(sumValuesWithKey(2, finalDices)) + "\n"}); }
-	//if (player.isThreesEmpty()) { pointsTableVec.insert({ 2, " Trójki:\t\t " + to_string(sumValuesWithKey(3, finalDices)) + "\n"}); }
-	//if (player.isFoursEmpty()) { pointsTableVec.insert({ 3, " Czwórki:\t\t " + to_string(sumValuesWithKey(4, finalDices)) + "\n"}); }
-	//if (player.isFivesEmpty()) { pointsTableVec.insert({ 4, " Pi¹tki:\t\t " + to_string(sumValuesWithKey(5, finalDices)) + "\n"}); }
-	//if (player.isSixesEmpty()) { pointsTableVec.insert({ 5, " Szóstki:\t\t " + to_string(sumValuesWithKey(6, finalDices)) + "\n"}); }
-	//if (player.isTripleEmpty()) { pointsTableVec.insert({ 6, " 3 jednakowe:\t\t " + to_string(sumXSameValues(finalDices, 3)) + "\n"}); }
-	//if (player.isQuadrupleEmpty()) { pointsTableVec.insert({ 7, " 4 jednakowe:\t\t " + to_string(sumXSameValues(finalDices, 4)) + "\n"}); }
-	//if (player.isFullEmpty()) { 
-	//	areXUniqueValues(finalDices, 2) ? pointsTableVec.insert({ 8, " Full:\t\t\t 25\n"}) : pointsTableVec.insert({ 8, " Full:\t\t\t 0\n" }); }
-	//if (player.isSmallStritEmpty()) { 
-	//	areXInOrder(finalDices, 4) ? pointsTableVec.insert({ 9, " Ma³y strit:\t\t 30\n"}) : pointsTableVec.insert({ 9, " Ma³y strit:\t\t 0\n" }); }
-	//if (player.isBigStritEmpty()) { 
-	//	areXInOrder(finalDices, 5) ? pointsTableVec.insert({ 10, " Du¿y strit:\t\t 40\n"}) : pointsTableVec.insert({ 10, " Du¿y strit:\t\t 0\n" }); }
-	//if (player.isGeneralEmpty()) { 
-	//	areXUniqueValues(finalDices, 1) ? pointsTableVec.insert({ 11, " Genera³:\t\t 50\n"}) : pointsTableVec.insert({ 11, " Genera³:\t\t 0\n" }); }
-	//if (player.isChanceEmpty()) { pointsTableVec.insert({ 12, " Szansa:\t\t " + to_string(sumAllValues(finalDices)) + "\n"}); }
-
 	map<int, string> pointsALLTableVec;
 	pointsALLTableVec.insert({ 0, " Jedynki:\t\t " + to_string(sumValuesWithKey(1, finalDices)) + "\n" });
 	pointsALLTableVec.insert({ 1, " Dwójki:\t\t " + to_string(sumValuesWithKey(2, finalDices)) + "\n" });
@@ -251,7 +229,7 @@ void pointsTable(vector<int> finalDices, Participant& player, int round) {
 	do {
 		switch ((key = _getch())) { //Check inputed key character.
 		case KEY_UP:
-			if (selected > 0) {
+			//if (selected > 0) {
 				--selected;
 				while (true) {
 					if (selected < 0) {
@@ -266,11 +244,11 @@ void pointsTable(vector<int> finalDices, Participant& player, int round) {
 					}
 				}
 				updated = true;
-			}
+			//}
 			break;
 		
 		case KEY_DOWN:
-			if (selected < numChoices - 1) {
+			//if (selected < numChoices - 1) {
 				++selected;
 				while (true) {
 					if (selected > numChoices - 1) {
@@ -285,7 +263,7 @@ void pointsTable(vector<int> finalDices, Participant& player, int round) {
 					}
 				}
 				updated = true;
-			}
+			//}
 			break;
 		case KEY_ENTER:
 			selecting = false;
@@ -293,7 +271,7 @@ void pointsTable(vector<int> finalDices, Participant& player, int round) {
 		default: break;
 		}
 
-		if (updated) {  //Lets us know what the currently selected value is.
+		if (updated) { 
 			system("cls");
 			color(TEXT_COLOR);
 			playerCall(round, player);
@@ -318,14 +296,8 @@ void pointsTable(vector<int> finalDices, Participant& player, int round) {
 			updated = false;
 		}
 
-		/*cout << "\n\n";
-		for (auto& el : player.pointsTableSelectedIds) {
-			cout << el << ", ";
-		}
-		cout << "   ::: selected = " << selected;*/
 	} while (selecting);
 
-	// NAPRAWIC SYSTEM... NIE UWZGLEDNIA WYBRANYCH POZYCJI
 	if (selected == 0) {
 		player.setOnes(finalDices);
 		player.pointsTableSelectedIds.push_back(selected);
@@ -395,7 +367,7 @@ void Game::roundHandler(Participant& player) { // one full round
 		resultsSet.clear();
 		while (true) {
 			if (_getch() == KEY_ENTER) {
-				for (int i = selectedDices.size(); i < numOfDices; i++) { // all dices left (gives 0 if has been already selected)
+				for (int i = selectedDices.size(); i < numOfDices; i++) { 
 					resultsSet.insert(std::pair<int, int>(i, randomNum(1, 6)));
 				}
 				break;
@@ -438,7 +410,7 @@ void Game::roundHandler(Participant& player) { // one full round
 				updated = true;
 				break;
 			case KEY_HELP:
-				cheatSheet();
+				cheatSheet(player);
 				break;
 			case KEY_END_TURN:
 				finalSet = selectedDices;
@@ -462,7 +434,7 @@ void Game::roundHandler(Participant& player) { // one full round
 			//default: break;
 			}
 
-			if (updated) {  //Lets us know what the currently selected value is.
+			if (updated) { 
 				system("cls");
 				playerCall(round, player);
 				controlsHelper();

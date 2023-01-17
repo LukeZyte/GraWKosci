@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Player.h"
 #include "Participant.h"
 #include "Globals.h"
 #include "Interface.h"
@@ -29,9 +28,7 @@ protected:
 	int numOfDices = 5;
 	int numOfParticipants;
 	vector<Participant> players;	// vector of all participants
-	//int maxRounds;					// rounds played
-	int round = 0;				// current round
-	//int turn = 1;					// whoose turn ( 1 - first player, 2 - second player, ..., n - last player )
+	int round = 0;					// current round
 
 public:
 	Game(vector<Participant> _players) : players(_players) {
@@ -39,8 +36,6 @@ public:
 	};
 
 	void initGame();
-	//void playerCall(Player player);
-	//void playerCall(int round, Participant player);
 	void gameplay();
 	void roundHandler(Participant& player);
 	void gameFinished();

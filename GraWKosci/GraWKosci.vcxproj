@@ -144,14 +144,12 @@
     <ClCompile Include="GraWKosci.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="Participant.cpp" />
-    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Participant.h" />
-    <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

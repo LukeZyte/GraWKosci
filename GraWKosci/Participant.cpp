@@ -13,13 +13,17 @@ int sumValuesWithKey2(int key, vector<int> vec) {
 }
 
 int sumXSameValues2(vector<int> vec, int x) {
+	int sum = 0;
 	for (auto& el : vec) {
 		int number = std::count(vec.begin(), vec.end(), el);
-		if (number == x) {
-			return el * x;
+		if (number >= x) {
+			for (auto& value : vec) {
+				sum += value;
+			}
+			return sum;
 		}
 	}
-	return 0;
+	return sum;
 }
 
 bool areXInOrder2(vector<int> vec, int x) {
@@ -112,7 +116,7 @@ void Participant::setTriple(vector<int> dices) {
 }
 
 void Participant::setQuadruple(vector<int> dices) {
-	quadruple = sumXSameValues2(dices, 3);
+	quadruple = sumXSameValues2(dices, 4);
 	allPoints += quadruple;
 }
 

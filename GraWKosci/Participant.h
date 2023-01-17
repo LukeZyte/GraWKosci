@@ -1,15 +1,18 @@
 #pragma once
 
-#include "Player.h"
-
 #include <string>
 #include <vector>
 #include <set>
 #include <algorithm>
 
-class Participant :
-    public Player
+using std::string;
+using std::vector;
+using std::set;
+
+class Participant
 {
+	string nickname;
+
 	// Points from each category; 99 means its empty
 	int ones = 99;
 	int twos = 99;
@@ -30,7 +33,11 @@ class Participant :
 	int allPoints = 0;
 
 public:
-	Participant(string _nickname) : Player(_nickname) {}
+	Participant(string _nickname) : nickname(_nickname) {}
+
+	string getNickname() {
+		return nickname;
+	}
 
 	// vector with already taken points from the table
 	vector<int> pointsTableSelectedIds;

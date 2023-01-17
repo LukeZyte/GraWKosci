@@ -153,7 +153,7 @@ void Interface::mainMenu() {
     int selected = 1;       // Which option is selected.
     int numChoices = 4;     // The number of available choices.
     bool selecting = true;  // True if we are still waiting for the user to press enter.
-    bool updated = true;   // True if the selected value has just been updated.
+    bool updated = true;    // True if the selected value has just been updated.
 
     menuList(selected);
 
@@ -178,7 +178,7 @@ void Interface::mainMenu() {
         default: break;
         }
 
-        if (updated) {  //Lets us know what the currently selected value is.
+        if (updated) { 
             system("cls");
             menuList(selected);
             updated = false;
