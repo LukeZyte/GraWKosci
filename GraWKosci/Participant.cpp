@@ -1,163 +1,69 @@
 #include "Participant.h"
 
-#include <iostream>
-
-int sumValuesWithKey2(int key, vector<int> vec) {
-	int sum = 0;
-	for (auto& el : vec) {
-		if (el == key) {
-			sum += el;
-		}
+void Participant::setOnes(int points) {
+	ones = points;
+		allPoints += ones;
 	}
-	return sum;
-}
-
-int sumXSameValues2(vector<int> vec, int x) {
-	int sum = 0;
-	for (auto& el : vec) {
-		int number = std::count(vec.begin(), vec.end(), el);
-		if (number >= x) {
-			for (auto& value : vec) {
-				sum += value;
-			}
-			return sum;
-		}
+	
+	void Participant::setTwos(int points) {
+		twos = points;
+		allPoints += twos;
 	}
-	return sum;
-}
-
-bool areXInOrder2(vector<int> vec, int x) {
-	int sum = 1;
-	std::sort(vec.begin(), vec.end());
-	for (int i = 0; i < vec.size() - 1; i++) {
-		if (vec[i + 1] == vec[i] + 1) {
-			sum++;
-			if (sum == x) {
-				return true;
-			}
-		}
-		else {
-			sum = 1;
-		}
+	
+	void Participant::setThrees(int points) {
+		threes = points;
+		allPoints += threes;
 	}
-	return false;
-}
-
-bool areXUniqueValues2(vector<int> vec, int x) {
-	set<int> unique;
-	for (auto& el : vec) {
-		unique.insert(el);
+	
+	void Participant::setFours(int points) {
+		fours = points;
+		allPoints += fours;
 	}
-	if (unique.size() == x) {
-		return true;
+	
+	void Participant::setFives(int points) {
+		fives = points;
+		allPoints += fives;
 	}
-	return false;
-}
-
-bool isFull2(vector<int>vec, int x) {
-	if (!areXUniqueValues2(vec, x))
-		return false;
-	// two variables with 2 unique numbers from vec
-	int firstNum = vec[0];
-	int secondNum = 0;
-	for (auto& el : vec) {
-		if (el != firstNum)
-			secondNum = el;
+	
+	void Participant::setSixes(int points) {
+		sixes = points;
+		allPoints += sixes;
 	}
-	int numOfFirstNums = std::count(vec.begin(), vec.end(), firstNum);
-	int numOfSecondNums = std::count(vec.begin(), vec.end(), secondNum);
-
-	if ((numOfFirstNums == 2 && numOfSecondNums == 3) || (numOfFirstNums == 3 && numOfSecondNums == 2))
-		return true;
-	return false;
-}
-
-int sumAllValues2(vector<int> vec) {
-	int sum = 0;
-	for (auto& el : vec) {
-		sum += el;
+	
+	void Participant::setTriple(int points) {
+		triple = points;
+		allPoints += triple;
 	}
-	return sum;
-};
-
-void Participant::setOnes(vector<int> dices) {
-	ones = sumValuesWithKey2(1, dices);
-	allPoints += ones;
-}
-
-void Participant::setTwos(vector<int> dices) {
-	twos = sumValuesWithKey2(2, dices);
-	allPoints += twos;
-}
-
-void Participant::setThrees(vector<int> dices) {
-	threes = sumValuesWithKey2(3, dices);
-	allPoints += threes;
-}
-
-void Participant::setFours(vector<int> dices) {
-	fours = sumValuesWithKey2(4, dices);
-	allPoints += fours;
-}
-
-void Participant::setFives(vector<int> dices) {
-	fives = sumValuesWithKey2(5, dices);
-	allPoints += fives;
-}
-
-void Participant::setSixes(vector<int> dices) {
-	sixes = sumValuesWithKey2(6, dices);
-	allPoints += sixes;
-}
-
-void Participant::setTriple(vector<int> dices) {
-	triple = sumXSameValues2(dices, 3);
-	allPoints += triple;
-}
-
-void Participant::setQuadruple(vector<int> dices) {
-	quadruple = sumXSameValues2(dices, 4);
-	allPoints += quadruple;
-}
-
-void Participant::setFull(vector<int> dices) {
-	if (isFull2(dices, 2))
-		full = 25;
-	else 
-		full = 0;
-
-	allPoints += full;
-}
-
-void Participant::setSmallStrit(vector<int> dices) {
-	if (areXInOrder2(dices, 4))
-		smallStrit = 30;
-	else smallStrit = 0;
-
-	allPoints += smallStrit;
-}
-
-void Participant::setBigStrit(vector<int> dices) {
-	if (areXInOrder2(dices, 5))
-		bigStrit = 40;
-	else bigStrit = 0;
-
-	allPoints += bigStrit;
-}
-
-void Participant::setGeneral(vector<int> dices) {
-	if (areXUniqueValues2(dices, 1))
-		general = 50;
-	else general = 0;
-
-	allPoints += general;
-}
-
-void Participant::setChance(vector<int> dices) {
-	chance = sumAllValues2(dices);
-	allPoints += chance;
-}
-
+	
+	void Participant::setQuadruple(int points) {
+		quadruple = points;
+		allPoints += quadruple;
+	}
+	
+	void Participant::setFull(int points) {
+		full = points;
+		allPoints += full;
+	}
+	
+	void Participant::setSmallStrit(int points) {
+		smallStrit = points;
+		allPoints += smallStrit;
+	}
+	
+	void Participant::setBigStrit(int points) {
+		bigStrit = points;
+		allPoints += bigStrit;
+	}
+	
+	void Participant::setGeneral(int points) {
+		general = points;
+		allPoints += general;
+	}
+	
+	void Participant::setChance(int points) {
+		chance = points;
+		allPoints += chance;
+	}
 
 bool Participant::isOnesEmpty() {
 	if (ones == 99) {

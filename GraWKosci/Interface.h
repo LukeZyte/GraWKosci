@@ -1,5 +1,5 @@
 #pragma once
-#include "Interface.h"
+#include "Game.h"
 #include "Globals.h"
 
 #include <iostream>

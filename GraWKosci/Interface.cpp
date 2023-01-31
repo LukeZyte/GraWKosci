@@ -1,12 +1,9 @@
 #include "Interface.h"
-#include "Game.h"
 
 int minNicknameCharLong = 1;
 int maxNicknameCharLong = 20;
 int minNumOfParticipants = 2;
 int maxNumOfParticipants = 4;
-//int minNumOfRounds = 1;
-//int maxNumOfRounds = 9;
 
 bool areOnlySpaces(string& word) {
     for (auto& letter : word) {
@@ -65,8 +62,6 @@ void menuList(int selected) {
 }
 
 void newGame(int numOfParticipants) {
-    //string numOfParticipantsSTR = 0;
-    //int numOfParticipants = 99;
     int numOfRounds = 1;
     vector<Participant> participants;
     vector<string> takenNicknames;
@@ -74,14 +69,6 @@ void newGame(int numOfParticipants) {
     // Number of players and their nicknames
     system("cls");
     color(TEXT_COLOR);
-    /*
-    do {
-        cout << "\n Podaj iloœæ graczy (od " << minNumOfParticipants << " do " << maxNumOfParticipants << "): ";
-        getline(cin, numOfParticipantsSTR);
-        if (numOfParticipants < minNumOfParticipants || numOfParticipants > maxNumOfParticipants) {
-            cout << "\n Nie mo¿na utworzyæ gry dla takiej iloœci graczy!\n";
-        }
-    } while (numOfParticipants < minNumOfParticipants || numOfParticipants > maxNumOfParticipants);*/
 
     string nickname;
     for (int i = 0; i < numOfParticipants; i++) {
@@ -104,20 +91,6 @@ void newGame(int numOfParticipants) {
         }
     }
 
-    // Number of rounds in the game
-    /*do {
-        cout << "\n Podaj iloœæ rund w grze (od " << minNumOfRounds << " do " << maxNumOfRounds << "): ";
-        cin >> numOfRounds;
-        if (numOfRounds < minNumOfRounds || numOfRounds > maxNumOfRounds) {
-            cout << "\n Nie mo¿na utworzyæ gry dla takiej iloœci rund!\n";
-        }
-    } while (numOfRounds < minNumOfRounds || numOfRounds > maxNumOfRounds);*/
-
-    // Game creation
-        //for (auto& p : participants) {
-        //    cout << p.getNickname() << ", ";
-        //}
-        //cout << "\nrund: " << numOfRounds << "\n";
     system("cls");
     color(PRIMARY_COLOR);
     cout << "\n   Zasady gry:\n";

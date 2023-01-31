@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <vector>
 #include <set>
@@ -42,19 +43,19 @@ public:
 	// vector with already taken points from the table
 	vector<int> pointsTableSelectedIds;
 
-	void setOnes(vector<int> dices);
-	void setTwos(vector<int> dices);
-	void setThrees(vector<int> dices);
-	void setFours(vector<int> dices);
-	void setFives(vector<int> dices);
-	void setSixes(vector<int> dices);
-	void setTriple(vector<int> dices);
-	void setQuadruple(vector<int> dices);
-	void setFull(vector<int> dices);
-	void setSmallStrit(vector<int> dices);
-	void setBigStrit(vector<int> dices);
-	void setGeneral(vector<int> dices);
-	void setChance(vector<int> dices);
+	void setOnes(int points);
+	void setTwos(int points);
+	void setThrees(int points);
+	void setFours(int points);
+	void setFives(int points);
+	void setSixes(int points);
+	void setTriple(int points);
+	void setQuadruple(int points);
+	void setFull(int points);
+	void setSmallStrit(int points);
+	void setBigStrit(int points);
+	void setGeneral(int points);
+	void setChance(int points);
 
 	// returns true if elements = 99
 	bool isOnesEmpty();

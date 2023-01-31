@@ -1,8 +1,8 @@
 #include "Game.h"
 
 int randomNum(int min, int max) {
-	std::random_device rd; // obtain a random number from hardware
-	std::mt19937 gen(rd()); // seed the generator
+	std::random_device rd;		// obtain a random number from hardware
+	std::mt19937 gen(rd());		// seed the generator
 	std::uniform_int_distribution<> distr(min, max); // define the range
 	return distr(gen);
 }
@@ -23,7 +23,7 @@ void controlsHelper() {
 }
 
 void cheatSheet(Participant& player) {
-	cout << "Tabela uk³adów oczek\n\n";
+	cout << "\n\t Tabela uk³adów oczek\n\n";
 	cout <<
 		" U¿yte |    Nazwa    |   Warunek do zdobycia  |  Przyk³ad  | Wynik dla przyk³adu\n" <<
 		"-------|-------------|------------------------|------------|---------------------\n"; color(PRIMARY_COLOR); player.isOnesEmpty() ? cout << "       " : cout << "  Tak  "; color(TEXT_COLOR); cout <<
@@ -54,7 +54,7 @@ void dicesList(map<int, int> resultsSet, int selectedDice) {
 			continue;
 		}
 		color(NS_TEXT_COLOR);
-		cout << "\t" << "(" << i << ")";
+		cout << "\t" << "(" << i + 1 << ")";
 		color(TEXT_COLOR);
 	}
 	cout << "\n";
@@ -84,15 +84,6 @@ int sumValuesWithKey(int key, vector<int> vec) {
 	return sum;
 }
 
-//int sumXSameValues(vector<int> vec, int x) {
-//	for (auto& el : vec) {
-//		int number = std::count(vec.begin(), vec.end(), el);
-//		if (number == x) {
-//			return el * x;
-//		}
-//	}
-//	return 0;
-//}
 int sumXSameValues(vector<int> vec, int x) {
 	int sum = 0;
 	for (auto& el : vec) {
@@ -178,20 +169,35 @@ void pointsTable(vector<int> finalDices, Participant& player, int round) {
 	cout << "\n\n Wybierz uk³ad:\n\n";
 	cout << " Nazwa\t    Punkty do zdobycia\n-------------------------------\n";
 
+	int onesPoints = sumValuesWithKey(1, finalDices);
+	int twosPoints = sumValuesWithKey(2, finalDices);
+	int threesPoints = sumValuesWithKey(3, finalDices);
+	int foursPoints = sumValuesWithKey(4, finalDices);
+	int fivesPoints = sumValuesWithKey(5, finalDices);
+	int sixesPoints = sumValuesWithKey(6, finalDices);
+	int triplePoints = sumXSameValues(finalDices, 3);
+	int quadruplePoints = sumXSameValues(finalDices, 4);
+	int fullPoints = isFull(finalDices, 2) ? 25 : 0;
+	int smallStritPoints = areXInOrder(finalDices, 4) ? 30 : 0;
+	int bigStritPoints = areXInOrder(finalDices, 5) ? 40 : 0;
+	int generalPoints = areXUniqueValues(finalDices, 1) ? 50 : 0;
+	int chancePoints = sumAllValues(finalDices);
+
 	map<int, string> pointsALLTableVec;
-	pointsALLTableVec.insert({ 0, " Jedynki:\t\t " + to_string(sumValuesWithKey(1, finalDices)) + "\n" });
-	pointsALLTableVec.insert({ 1, " Dwójki:\t\t " + to_string(sumValuesWithKey(2, finalDices)) + "\n" });
-	pointsALLTableVec.insert({ 2, " Trójki:\t\t " + to_string(sumValuesWithKey(3, finalDices)) + "\n" });
-	pointsALLTableVec.insert({ 3, " Czwórki:\t\t " + to_string(sumValuesWithKey(4, finalDices)) + "\n" });
-	pointsALLTableVec.insert({ 4, " Pi¹tki:\t\t " + to_string(sumValuesWithKey(5, finalDices)) + "\n" });
-	pointsALLTableVec.insert({ 5, " Szóstki:\t\t " + to_string(sumValuesWithKey(6, finalDices)) + "\n" });
-	pointsALLTableVec.insert({ 6, " 3 jednakowe:\t\t " + to_string(sumXSameValues(finalDices, 3)) + "\n" });
-	pointsALLTableVec.insert({ 7, " 4 jednakowe:\t\t " + to_string(sumXSameValues(finalDices, 4)) + "\n" });
-		isFull(finalDices, 2) ? pointsALLTableVec.insert({ 8, " Full:\t\t\t 25\n" }) : pointsALLTableVec.insert({ 8, " Full:\t\t\t 0\n" });
-		areXInOrder(finalDices, 4) ? pointsALLTableVec.insert({ 9, " Ma³y strit:\t\t 30\n" }) : pointsALLTableVec.insert({ 9, " Ma³y strit:\t\t 0\n" });
-		areXInOrder(finalDices, 5) ? pointsALLTableVec.insert({ 10, " Du¿y strit:\t\t 40\n" }) : pointsALLTableVec.insert({ 10, " Du¿y strit:\t\t 0\n" });
-		areXUniqueValues(finalDices, 1) ? pointsALLTableVec.insert({ 11, " Genera³:\t\t 50\n" }) : pointsALLTableVec.insert({ 11, " Genera³:\t\t 0\n" });
-	pointsALLTableVec.insert({ 12, " Szansa:\t\t " + to_string(sumAllValues(finalDices)) + "\n" });
+
+	pointsALLTableVec.insert({ 0, " Jedynki:\t\t " + to_string(onesPoints) + "\n" });
+	pointsALLTableVec.insert({ 1, " Dwójki:\t\t " + to_string(twosPoints) + "\n" });
+	pointsALLTableVec.insert({ 2, " Trójki:\t\t " + to_string(threesPoints) + "\n" });
+	pointsALLTableVec.insert({ 3, " Czwórki:\t\t " + to_string(foursPoints) + "\n" });
+	pointsALLTableVec.insert({ 4, " Pi¹tki:\t\t " + to_string(fivesPoints) + "\n" });
+	pointsALLTableVec.insert({ 5, " Szóstki:\t\t " + to_string(sixesPoints) + "\n" });
+	pointsALLTableVec.insert({ 6, " 3 jednakowe:\t\t " + to_string(triplePoints) + "\n" });
+	pointsALLTableVec.insert({ 7, " 4 jednakowe:\t\t " + to_string(quadruplePoints) + "\n" });
+	pointsALLTableVec.insert({ 8, " Full:\t\t\t " + to_string(fullPoints) + "\n" });
+	pointsALLTableVec.insert({ 9, " Ma³y strit:\t\t " + to_string(smallStritPoints) + "\n" });
+	pointsALLTableVec.insert({ 10, " Du¿y strit:\t\t " + to_string(bigStritPoints) + "\n" });
+	pointsALLTableVec.insert({ 11, " Genera³:\t\t " + to_string(generalPoints) + "\n" });
+	pointsALLTableVec.insert({ 12, " Szansa:\t\t " + to_string(chancePoints) + "\n" });
 
 	int selected = 0;
 	bool updated = true;
@@ -299,55 +305,55 @@ void pointsTable(vector<int> finalDices, Participant& player, int round) {
 	} while (selecting);
 
 	if (selected == 0) {
-		player.setOnes(finalDices);
+		player.setOnes(onesPoints);
 		player.pointsTableSelectedIds.push_back(selected);
 	}
 	else if (selected == 1) {
-		player.setTwos(finalDices);
+		player.setTwos(twosPoints);
 		player.pointsTableSelectedIds.push_back(selected);
 	}
 	else if (selected == 2) {
-		player.setThrees(finalDices);
+		player.setThrees(threesPoints);
 		player.pointsTableSelectedIds.push_back(selected);
 		}
 	else if (selected == 3) {
-		player.setFours(finalDices);
+		player.setFours(foursPoints);
 		player.pointsTableSelectedIds.push_back(selected);
 		}
 	else if (selected == 4) {
-		player.setFives(finalDices);
+		player.setFives(fivesPoints);
 		player.pointsTableSelectedIds.push_back(selected);
 		}
 	else if (selected == 5) {
-		player.setSixes(finalDices);
+		player.setSixes(sixesPoints);
 		player.pointsTableSelectedIds.push_back(selected);
 		}
 	else if (selected == 6) {
-		player.setTriple(finalDices);
+		player.setTriple(triplePoints);
 		player.pointsTableSelectedIds.push_back(selected);
 		}
 	else if (selected == 7) {
-		player.setQuadruple(finalDices);
+		player.setQuadruple(quadruplePoints);
 		player.pointsTableSelectedIds.push_back(selected);
 		}
 	else if (selected == 8) {
-		player.setFull(finalDices);
+		player.setFull(fullPoints);
 		player.pointsTableSelectedIds.push_back(selected);
 		}
 	else if (selected == 9) {
-		player.setSmallStrit(finalDices);
+		player.setSmallStrit(smallStritPoints);
 		player.pointsTableSelectedIds.push_back(selected);
 		}
 	else if (selected == 10) {
-		player.setBigStrit(finalDices);
+		player.setBigStrit(bigStritPoints);
 		player.pointsTableSelectedIds.push_back(selected);
 		}
 	else if (selected == 11) {
-		player.setGeneral(finalDices);
+		player.setGeneral(generalPoints);
 		player.pointsTableSelectedIds.push_back(selected);
 		}
 	else if (selected == 12) {
-		player.setChance(finalDices);
+		player.setChance(chancePoints);
 		player.pointsTableSelectedIds.push_back(selected);
 		}
 }
